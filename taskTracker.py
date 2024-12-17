@@ -13,7 +13,13 @@ argLen = len(sys.argv)
 
 # No arguments
 if(argLen == 1):
-    print("Please provide an argument")
+    print("Please provide one of the following commands:\n")
+    print("list")
+    print("add")
+    print("update")
+    print("delete")
+    print("mark-in-progress")
+    print("mark-done")
 
 # 1 argument
 elif(argLen == 2):
@@ -94,6 +100,35 @@ elif(argLen == 3):
                     with open("tasks.json",'w') as file:
                         json.dump(updatedTasks,file,indent=4)
                     print(f"Task ID {taskID} deleted successfully")
+    
+    #Marking task as "in-progress"
+    elif(sys.argv[1] == "mark-in-progress"):
+        taskID = sys.argv[2]
+        taskFound = False
+        if(not os.path.isfile("tasks.json")):
+            print("No task file found")
+        else:
+            with open("tasks.json",'r') as file:
+                data = json.load(file)
+                taskList = data["tasks"]
+                for i in range(0,len(taskList)):
+                    if str(taskList[i]["id"]) == str(taskID):
+                        taskFound = True
+                        break
+            if not taskFound:
+                print("Task ID not found")
+            else:
+                if(taskList[i]["status"] == "in-progress"):
+                    print(f"Task {taskID} is already in progress")
+                else:
+                    taskList[i]["status"] = "in-progress"
+                    taskList[i]["updatedAt"] = str(datetime.datetime.now())
+                    updatedTasks = {
+                        "tasks": taskList
+                    }
+                    with open("tasks.json",'w') as file:
+                        json.dump(updatedTasks,file,indent=4)
+                    print(f"Task ID {taskID} is now in progress")
 
 # 3 arguments
 elif(argLen == 4):
