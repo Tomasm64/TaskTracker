@@ -37,6 +37,9 @@ elif(argLen == 2):
                     print(f"Created: {t["createdAt"]}")
                     print(f"Updated: {t["updatedAt"]}")
                     print("-------------------------------------")
+
+    else:
+        print("invalid command")
                 
 # 2 arguments
 elif(argLen == 3):
@@ -175,6 +178,8 @@ elif(argLen == 3):
                         print(f"Created: {t["createdAt"]}")
                         print(f"Updated: {t["updatedAt"]}")
                         print("-------------------------------------")
+    else:
+        print("invalid command")
 
 # 3 arguments
 elif(argLen == 4):
@@ -204,4 +209,7 @@ elif(argLen == 4):
                 with open("tasks.json",'w') as file:
                     json.dump(updatedTasks,file,indent=4)
                 print(f"Task ID {taskID} updated successfully")
+
+    else:
+        print("invalid command")
                 
