@@ -9,17 +9,20 @@ import os
     #data = json.load(file)
 
 argLen = len(sys.argv)
-#Decide what to do based on number of arguments
+# Decide what to do based on number of arguments
+
+# No arguments
 if(argLen == 1):
     print("Please provide an argument")
 
+# 1 argument
 elif(argLen == 2):
     # List all tasks
     if(sys.argv[1] == "list"):
         if(not os.path.isfile("tasks.json")):
             print("No task file found")
         else:
-            with open("sampleTasks.json",'r') as file:
+            with open("tasks.json",'r') as file:
                 data = json.load(file)
                 taskList = data["tasks"]
                 for t in taskList:
@@ -29,7 +32,7 @@ elif(argLen == 2):
                     print(f"Updated: {t["updatedAt"]}")
                     print("-------------------------------------")
                 
-
+# 2 arguments
 elif(argLen == 3):
     # User wants to add a task
     if(sys.argv[1] == "add"):
@@ -61,5 +64,34 @@ elif(argLen == 3):
         #Write to JSON file
         with open("tasks.json",'w') as file:
             json.dump(tasks,file,indent=4)
-        
+
         print(f"Task added successfuly (ID: {taskID})")
+
+# 3 arguments
+elif(argLen == 4):
+    # User wants to update a task
+    if(sys.argv[1] == "update"):
+        taskID = sys.argv[2]
+        newDesc = sys.argv[3]
+        updated = False
+        if(not os.path.isfile("tasks.json")):
+            print("No task file found")
+        else:
+            with open("tasks.json",'r') as file:
+                data = json.load(file)
+                taskList = data["tasks"]
+                for i in range(0,len(taskList)):
+                    if str(taskList[i]["id"]) == str(taskID):
+                        taskList[i]["description"] = newDesc
+                        updated = True
+                        break
+            if not updated:
+                print("Task ID not found")
+            else:
+                updatedTasks = {
+                    "tasks": taskList
+                }
+                with open("tasks.json",'w') as file:
+                    json.dump(updatedTasks,file,indent=4)
+                print(f"Task ID {taskID} updated successfully")
+                
