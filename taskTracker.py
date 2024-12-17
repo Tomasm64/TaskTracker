@@ -159,6 +159,23 @@ elif(argLen == 3):
                         json.dump(updatedTasks,file,indent=4)
                     print(f"Task ID {taskID} is now done")
 
+    # Listing tasks by status
+    elif(sys.argv[1] == "list"):
+        if(not os.path.isfile("tasks.json")):
+            print("No task file found")
+        else:
+            taskStatus = sys.argv[2]
+            with open("tasks.json",'r') as file:
+                data = json.load(file)
+                taskList = data["tasks"]
+                for t in taskList:
+                    if(t["status"] == taskStatus):
+                        print(f"{t["id"]}: {t["description"]}")
+                        print(f"Status: {t["status"]}")
+                        print(f"Created: {t["createdAt"]}")
+                        print(f"Updated: {t["updatedAt"]}")
+                        print("-------------------------------------")
+
 # 3 arguments
 elif(argLen == 4):
     # Updating the name of a task
