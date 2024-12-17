@@ -17,7 +17,7 @@ if(argLen == 1):
 
 # 1 argument
 elif(argLen == 2):
-    # List all tasks
+    # Listing all tasks
     if(sys.argv[1] == "list"):
         if(not os.path.isfile("tasks.json")):
             print("No task file found")
@@ -34,7 +34,7 @@ elif(argLen == 2):
                 
 # 2 arguments
 elif(argLen == 3):
-    # User wants to add a task
+    # Adding a task
     if(sys.argv[1] == "add"):
         taskDesc = sys.argv[2]
         taskID = 1
@@ -67,13 +67,17 @@ elif(argLen == 3):
 
         print(f"Task added successfuly (ID: {taskID})")
 
+    # Deleting a task
+    elif(sys.argv[1] == "delete"):
+        pass
+
 # 3 arguments
 elif(argLen == 4):
-    # User wants to update a task
+    # Updating a task
     if(sys.argv[1] == "update"):
         taskID = sys.argv[2]
         newDesc = sys.argv[3]
-        updated = False
+        taskFound = False
         if(not os.path.isfile("tasks.json")):
             print("No task file found")
         else:
@@ -83,9 +87,9 @@ elif(argLen == 4):
                 for i in range(0,len(taskList)):
                     if str(taskList[i]["id"]) == str(taskID):
                         taskList[i]["description"] = newDesc
-                        updated = True
+                        taskFound = True
                         break
-            if not updated:
+            if not taskFound:
                 print("Task ID not found")
             else:
                 updatedTasks = {
