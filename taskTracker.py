@@ -69,11 +69,35 @@ elif(argLen == 3):
 
     # Deleting a task
     elif(sys.argv[1] == "delete"):
-        pass
+        taskID = sys.argv[2]
+        taskFound = False
+        if(not os.path.isfile("tasks.json")):
+            print("No task file found")
+        else:
+            with open("tasks.json",'r') as file:
+                data = json.load(file)
+                taskList = data["tasks"]
+                for i in range(0,len(taskList)):
+                    if str(taskList[i]["id"]) == str(taskID):
+                        taskFound = True
+                        break
+            
+            if not taskFound:
+                print("Task ID not found")
+            else:
+                confirm = input(f"Are you sure you want to delete task {taskID}: {taskList[i]["description"]}? (y/n)\n")
+                if(confirm == 'y' or confirm == 'Y'):
+                    taskList.pop(i)
+                    updatedTasks = {
+                        "tasks": taskList
+                    }
+                    with open("tasks.json",'w') as file:
+                        json.dump(updatedTasks,file,indent=4)
+                    print(f"Task ID {taskID} deleted successfully")
 
 # 3 arguments
 elif(argLen == 4):
-    # Updating a task
+    # Updating the name of a task
     if(sys.argv[1] == "update"):
         taskID = sys.argv[2]
         newDesc = sys.argv[3]
@@ -87,6 +111,7 @@ elif(argLen == 4):
                 for i in range(0,len(taskList)):
                     if str(taskList[i]["id"]) == str(taskID):
                         taskList[i]["description"] = newDesc
+                        taskList[i]["updatedAt"] = str(datetime.datetime.now())
                         taskFound = True
                         break
             if not taskFound:
