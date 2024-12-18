@@ -2,18 +2,17 @@
     "tasks": [
         {
             "id": 1,
-            "description": "Wash laundry",
-            "status": "todo",
-            "createdAt": "2024-12-10T20:30:00Z",
-            "updatedAt": "2024-12-10T20:30:00Z"
+            "description": "Wash Dishes",
+            "status": "done",
+            "createdAt": "2024-12-14 13:48:38.013705",
+            "updatedAt": "2024-12-17 12:28:44.886513"
         },
-
         {
             "id": 2,
-            "description": "Clean dishes",
+            "description": "Clean room",
             "status": "todo",
-            "createdAt": "2024-12-10T20:30:00Z",
-            "updatedAt": "2024-12-10T20:30:00Z"
+            "createdAt": "2024-12-14 13:58:24.243554",
+            "updatedAt": "2024-12-14 13:58:24.243554"
         }
     ]
 }
