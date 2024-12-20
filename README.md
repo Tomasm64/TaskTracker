@@ -21,4 +21,4 @@ There are six possible functions when using this program. The examples shown use
 ### add
 This adds a task to the file "tasks.json". If the file does not exist, it will be created. It generates a unique ID number that increments from the ID of the last task on the list.
 
-````py taskTracker.py add "Wash Dishes"
+````py taskTracker.py add "Wash Dishes"````
