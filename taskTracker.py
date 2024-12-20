@@ -214,5 +214,5 @@ try:
         print("invalid number of arguments")
 
 except Exception as e:
-    print(e.message)
+    print("Exception has occured: ", e)
                 
